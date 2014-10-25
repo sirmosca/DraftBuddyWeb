@@ -1,0 +1,23 @@
+# Compiled object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compile Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.rlib
+target

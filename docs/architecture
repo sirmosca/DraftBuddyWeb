@@ -1,0 +1,37 @@
+draft buddy web
+
+backend
+  rust
+
+front end
+  angular js, backbone?
+  html
+  css
+  twitter bootstrap
+
+hosting
+  aws
+  app harbour
+
+
+backend
+  read data into application from file
+  let other captains know when a player has been drafted
+  allow captains to draft players
+  allow a captain to enter the draft
+
+front end
+  allow captain to enter the league
+  show a grid of the available players
+  allow captain to filter by position
+  allow captain to search for players
+  allow captain to view only undrafted players
+  allow captain to watch players
+  allow captain to view roster of any team
+  allow captain to set auto draft mode
+  allow captain to draft from a desktop/tablet/phone
+  
+future
+  maintain multiple leagues
+  draft recommendations
+  
