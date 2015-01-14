@@ -32,6 +32,11 @@ var PlayerView = Backbone.View.extend({
 	tagName: 'li',
 	template: _.template($('#player-template').html()),
 
+	 events: {
+		"click #watch-player" : "watchPlayer",
+	    "change #fantasyTeamId": "playerDrafted"
+	  },
+
 	initialize: function() {
 		this.render();
 	},
@@ -39,6 +44,25 @@ var PlayerView = Backbone.View.extend({
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
+	},
+
+	watchPlayer: function() {
+	},
+
+	playerDrafted: function(a) {
+		var selectedValue = $('#fantasyTeamId').val();
+		this.$el.addClass("player-drafted");
+		var fantasyTeam = fantasyTeamCollection.find(function(team) {
+			return team.get('name') == selectedValue;
+		});
+
+		if (selectedValue == '-- select team --') {
+			this.$el.removeClass("player-drafted");
+		}
+
+		this.model.set({ 
+		    'players' : fantasyTeam.get('players').push(this.model.toJSON()),
+		});
 	},
 });
 
@@ -61,11 +85,11 @@ var PlayerListView = Backbone.View.extend({
 });
 
 var fantasyTeamCollection = new FantasyTeamCollection([
-	{'name': '-- select team --'}, //not drafted
-	{'name': 'ben'},
-	{'name': 'shannon'},
-	{'name': 'mike'},
-	{'name': 'dana'}
+	{'name': '-- select team --', 'players': []}, //not drafted
+	{'name': 'ben', 'players': []},
+	{'name': 'shannon', 'players': []},
+	{'name': 'mike', 'players': []},
+	{'name': 'dana', 'players': []}
 ]);
 
 var playerCollection = new PlayerCollection([
