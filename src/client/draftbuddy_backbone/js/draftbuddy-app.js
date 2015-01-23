@@ -51,14 +51,34 @@ var PlayerView = Backbone.View.extend({
 
 	playerDrafted: function(a) {
 		var selectedValue = $('#fantasyTeamId').val();
+		var self = this;
 		this.$el.addClass("player-drafted");
+
+		fantasyTeamCollection.each(function(team) {
+			var players = team.get('players');
+
+			var foundPlayer = _.find(players, function(player) {
+				return player.rank == self.model.get('rank');;
+			});
+
+			if (foundPlayer != undefined) {
+				var updatedPlayers = [];
+
+				_.each(team.get('players'), function(player) {
+					if (player.rank != foundPlayer.rank) {
+						updatedPlayers.push(player);
+					}
+				});
+
+				team.set({
+					'players': updatedPlayers,
+				});
+			}
+		});
+
 		var fantasyTeam = fantasyTeamCollection.find(function(team) {
 			return team.get('name') == selectedValue;
 		});
-
-		if (selectedValue == '-- select team --') {
-			this.$el.removeClass("player-drafted");
-		}
 
 		this.model.set({ 
 		    'players' : fantasyTeam.get('players').push(this.model.toJSON()),
@@ -93,12 +113,12 @@ var fantasyTeamCollection = new FantasyTeamCollection([
 ]);
 
 var playerCollection = new PlayerCollection([
-	{'adp': 1.01, 'overall': 1.2, 'name': "DeMarco Murray", 'position': "RB", 'team': "DAL", 'times_drafted': 84, 'bye': 11, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection },
-	{'adp': 1.03, 'overall': 2.7, 'name': "Peyton Manning", 'position': "QB", 'team': "DEN", 'times_drafted': 41, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'adp': 1.03, 'overall': 3.4, 'name': "Marshawn Lynch", 'position': "RB", 'team': "SEA", 'times_drafted': 19, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'adp': 1.04, 'overall': 4.1, 'name': "LeVeon Bell", 'position': "RB", 'team': "PIT", 'times_drafted': 65, 'bye': 12, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'adp': 1.05, 'overall': 4.9, 'name': "Jamaal Charles", 'position': "RB", 'team': "KC", 'times_drafted': 67, 'bye': 6, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'adp': 1.05, 'overall': 5.1, 'name': "Demaryius Thomas", 'position': "WR", 'team': "DEN", 'times_drafted': 54, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
+	{'rank': 1, 'adp': 1.01, 'overall': 1.2, 'name': "DeMarco Murray", 'position': "RB", 'team': "DAL", 'times_drafted': 84, 'bye': 11, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection },
+	{'rank': 2, 'adp': 1.03, 'overall': 2.7, 'name': "Peyton Manning", 'position': "QB", 'team': "DEN", 'times_drafted': 41, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
+	{'rank': 3, 'adp': 1.03, 'overall': 3.4, 'name': "Marshawn Lynch", 'position': "RB", 'team': "SEA", 'times_drafted': 19, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
+	{'rank': 4, 'adp': 1.04, 'overall': 4.1, 'name': "LeVeon Bell", 'position': "RB", 'team': "PIT", 'times_drafted': 65, 'bye': 12, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
+	{'rank': 5, 'adp': 1.05, 'overall': 4.9, 'name': "Jamaal Charles", 'position': "RB", 'team': "KC", 'times_drafted': 67, 'bye': 6, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
+	{'rank': 6, 'adp': 1.05, 'overall': 5.1, 'name': "Demaryius Thomas", 'position': "WR", 'team': "DEN", 'times_drafted': 54, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
 ]);
 
 var playerListView = new PlayerListView({ collection: playerCollection });
