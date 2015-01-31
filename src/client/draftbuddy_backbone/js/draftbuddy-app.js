@@ -26,6 +26,18 @@ var FantasyTeamCollection = Backbone.Collection.extend({
 
 var PlayerCollection = Backbone.Collection.extend({
 	model: Player,
+
+
+	initialize: function(models, options) {
+		this.allModels = models;
+	},
+
+	getQBs: function() {
+		var qbs = this.allModels.filter(function(player) {
+			return player.position == "QB";
+		});
+		return qbs;
+	},
 });
 
 var PlayerView = Backbone.View.extend({
@@ -83,15 +95,53 @@ var PlayerView = Backbone.View.extend({
 		this.model.set({ 
 		    'players' : fantasyTeam.get('players').push(this.model.toJSON()),
 		});
+		this.model.set({
+			'drafted': true,
+		});
 	},
 });
 
 var PlayerListView = Backbone.View.extend({
-	el: '#playerSection',
+	el: '#mainView',
+
+	events: {
+		"click #show-qb" : "showQB",
+		"click #show-drafted": "showDrafted",
+	},
 
 	initialize: function() {
 		this.$playerList = $('#playerList');
 		this.render();
+
+	},
+
+	showDrafted: function() {
+		var showDrafted = $('#show-drafted').is(":checked");
+		var notDrafted = playerCollection.filter(function(player) {
+			if (showDrafted) {
+				console.log('3');
+				console.log(player);
+				return !showDrafted
+			}
+			console.log('5');
+				console.log(player);
+			return !player.get('drafted');
+		});
+		this.renderCollection(notDrafted);
+	},
+
+	showQB: function() {
+		var showQBOption = $('#show-qb').is(":checked");
+		
+
+		var qbs = playerCollection.filter(function(player) {
+			var pos = player.get('position');
+			if (showQBOption) {
+				return pos == "QB";
+			}
+			return !showQBOption;
+		});
+		this.renderCollection(qbs);
 	},
 
 	render: function() {
@@ -100,6 +150,15 @@ var PlayerListView = Backbone.View.extend({
 			this.$playerList.append(playerView.render().el);
 		}, this);
 
+		return this;
+	},
+
+	renderCollection: function(coll) {
+		this.$playerList.html("");
+		var player = _.each(coll, function(player) {
+			var playerView = new PlayerView({model: player});
+			this.$playerList.append(playerView.render().el);
+		}, this);
 		return this;
 	}
 });

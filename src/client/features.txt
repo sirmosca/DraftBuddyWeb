@@ -1,7 +1,10 @@
 1. styling based on being drafted (add/remove class)
+	done
 2. setting teams in combo box
+	done
 3. assigning players to teams
+	donep
 4. filtering based on different positions
 5. getting data from server
-6. validation of data
+6. validation of data 
 7. testing
