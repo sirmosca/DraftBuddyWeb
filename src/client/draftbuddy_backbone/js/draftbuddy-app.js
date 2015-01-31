@@ -119,12 +119,8 @@ var PlayerListView = Backbone.View.extend({
 		var showDrafted = $('#show-drafted').is(":checked");
 		var notDrafted = playerCollection.filter(function(player) {
 			if (showDrafted) {
-				console.log('3');
-				console.log(player);
 				return !showDrafted
 			}
-			console.log('5');
-				console.log(player);
 			return !player.get('drafted');
 		});
 		this.renderCollection(notDrafted);
