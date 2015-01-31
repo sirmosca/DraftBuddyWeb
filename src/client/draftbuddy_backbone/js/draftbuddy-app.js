@@ -27,17 +27,19 @@ var FantasyTeamCollection = Backbone.Collection.extend({
 var PlayerCollection = Backbone.Collection.extend({
 	model: Player,
 
-
-	initialize: function(models, options) {
-		this.allModels = models;
-	},
-
 	getQBs: function() {
-		var qbs = this.allModels.filter(function(player) {
-			return player.position == "QB";
+		var qbs = this.models.filter(function(player) {
+			return player.get('position') == "QB";
 		});
 		return qbs;
 	},
+
+	getUndraftedPlayers: function() {
+		var undrafted = this.models.filter(function(player) {
+			return !player.get('drafted');
+		})
+		return undrafted;
+	}
 });
 
 var PlayerView = Backbone.View.extend({
@@ -112,32 +114,30 @@ var PlayerListView = Backbone.View.extend({
 	initialize: function() {
 		this.$playerList = $('#playerList');
 		this.render();
-
 	},
 
 	showDrafted: function() {
 		var showDrafted = $('#show-drafted').is(":checked");
-		var notDrafted = playerCollection.filter(function(player) {
-			if (showDrafted) {
-				return !showDrafted
-			}
-			return !player.get('drafted');
-		});
-		this.renderCollection(notDrafted);
+		if (showDrafted) {
+			this.renderCollection(this.collection.models);	
+		}
+		else {
+			var undrafted = this.collection.getUndraftedPlayers();
+			this.renderCollection(undrafted);
+		}
 	},
 
 	showQB: function() {
 		var showQBOption = $('#show-qb').is(":checked");
-		
-
-		var qbs = playerCollection.filter(function(player) {
-			var pos = player.get('position');
-			if (showQBOption) {
-				return pos == "QB";
-			}
-			return !showQBOption;
-		});
-		this.renderCollection(qbs);
+		if (showQBOption) {
+			var qbs = this.collection.getQBs();
+			console.log(qbs);
+			this.renderCollection(qbs);	
+		}
+		else {
+			console.log(this.collection);
+			this.renderCollection(this.collection.models);
+		}
 	},
 
 	render: function() {
@@ -160,20 +160,20 @@ var PlayerListView = Backbone.View.extend({
 });
 
 var fantasyTeamCollection = new FantasyTeamCollection([
-	{'name': '-- select team --', 'players': []}, //not drafted
-	{'name': 'ben', 'players': []},
-	{'name': 'shannon', 'players': []},
-	{'name': 'mike', 'players': []},
-	{'name': 'dana', 'players': []}
+	new FantasyTeam({'name': '-- select team --', 'players': []}), //not drafted
+	new FantasyTeam({'name': 'ben', 'players': []}),
+	new FantasyTeam({'name': 'shannon', 'players': []}),
+	new FantasyTeam({'name': 'mike', 'players': []}),
+	new FantasyTeam({'name': 'dana', 'players': []}),
 ]);
 
 var playerCollection = new PlayerCollection([
-	{'rank': 1, 'adp': 1.01, 'overall': 1.2, 'name': "DeMarco Murray", 'position': "RB", 'team': "DAL", 'times_drafted': 84, 'bye': 11, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection },
-	{'rank': 2, 'adp': 1.03, 'overall': 2.7, 'name': "Peyton Manning", 'position': "QB", 'team': "DEN", 'times_drafted': 41, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'rank': 3, 'adp': 1.03, 'overall': 3.4, 'name': "Marshawn Lynch", 'position': "RB", 'team': "SEA", 'times_drafted': 19, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'rank': 4, 'adp': 1.04, 'overall': 4.1, 'name': "LeVeon Bell", 'position': "RB", 'team': "PIT", 'times_drafted': 65, 'bye': 12, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'rank': 5, 'adp': 1.05, 'overall': 4.9, 'name': "Jamaal Charles", 'position': "RB", 'team': "KC", 'times_drafted': 67, 'bye': 6, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
-	{'rank': 6, 'adp': 1.05, 'overall': 5.1, 'name': "Demaryius Thomas", 'position': "WR", 'team': "DEN", 'times_drafted': 54, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection},
+	new Player({'rank': 1, 'adp': 1.01, 'overall': 1.2, 'name': "DeMarco Murray", 'position': "RB", 'team': "DAL", 'times_drafted': 84, 'bye': 11, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection }),
+	new Player({'rank': 2, 'adp': 1.03, 'overall': 2.7, 'name': "Peyton Manning", 'position': "QB", 'team': "DEN", 'times_drafted': 41, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection}),
+	new Player({'rank': 3, 'adp': 1.03, 'overall': 3.4, 'name': "Marshawn Lynch", 'position': "RB", 'team': "SEA", 'times_drafted': 19, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection}),
+	new Player({'rank': 4, 'adp': 1.04, 'overall': 4.1, 'name': "LeVeon Bell", 'position': "RB", 'team': "PIT", 'times_drafted': 65, 'bye': 12, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection}),
+	new Player({'rank': 5, 'adp': 1.05, 'overall': 4.9, 'name': "Jamaal Charles", 'position': "RB", 'team': "KC", 'times_drafted': 67, 'bye': 6, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection}),
+	new Player({'rank': 6, 'adp': 1.05, 'overall': 5.1, 'name': "Demaryius Thomas", 'position': "WR", 'team': "DEN", 'times_drafted': 54, 'bye': 4, 'watch': true, 'drafted': false, 'shouldShow': true, 'fantasyTeams': fantasyTeamCollection}),
 ]);
 
 var playerListView = new PlayerListView({ collection: playerCollection });
