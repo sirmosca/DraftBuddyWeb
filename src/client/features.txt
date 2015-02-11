@@ -8,3 +8,7 @@
 5. getting data from server
 6. validation of data 
 7. testing
+
+
+
+when viewing video series full screen, you can't move to the next video
