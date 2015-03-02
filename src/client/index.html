@@ -10,18 +10,18 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<div ng-controller="PlayerController">
+		<div ng-controller="playerCtrl as ctrl">
 			<div>
 				Show Drated Players?
-				<input type="checkbox" ng-model="showDrafted">
+				<input type="checkbox" ng-model="ctrl.showDrafted">
 				QB
-				<input type="checkbox" ng-model="showQBOption" ng-change="showQB(showQBOption)">
+				<input type="checkbox" ng-model="ctrl.showQBOption" ng-change="ctrl.showQB(showQBOption)">
 			</div>
-			<div ng-repeat="player in players" ng-show="shouldShowDraftedPlayer(player)" ng-class="{'pending-delete': player.drafted}">
+			<div ng-repeat="player in ctrl.players" ng-show="ctrl.shouldShowDraftedPlayer(player)" ng-class="{'player-drafted': player.drafted}">
 				{{player.Name}}
 				{{player.ADP}}
 				<span class="nullable">
-	        		<select ng-show="shouldShow" ng-model="fantasyTeam" ng-options="team.name for team in teams" ng-change="draft(fantasyTeam, player)">
+	        		<select ng-show="ctrl.shouldShow" ng-model="fantasyTeam" ng-options="team.name for team in ctrl.teams" ng-change="ctrl.draft(fantasyTeam, player)">
 	        			<option value="">-- choose fantasy team -- </option>
 	        		</select>
 	        	</span>

@@ -1,26 +1,21 @@
-/**
-* draftbuddy Module
-*
-* Description
-*/
 var app = angular.module('draftbuddy', []);
 
-app.controller('PlayerController', function($scope, playerService) {
-	$scope.showDrafted = true;
-	$scope.shouldShow = true;
-	$scope.showQBOption = false;
-
-	loadPlayerData();
-
-	$scope.teams = [
+function PlayerController(playerService) {
+	this.showDrafted = true;
+	this.shouldShow = true;
+	this.showQBOption = false;
+	this.players = playerService.getAllPlayers();
+	this.teams = [
 		{'name':"adamo", 'players': []}, 
 		{'name':"ben", 'players': []}, 
 		{'name':"luke", 'players': []}, 
 		{'name':"mike", 'players': []}, 
 		{'name':"shannon", 'players': []}
 	];
+}
 
-	$scope.draft = function(fantasyTeam, player) {
+angular.extend(PlayerController.prototype, {
+	draft: function() {
 		for (var i=0; i < $scope.teams.length; i++) {
 			var team = $scope.teams[i];
 			if (team.name == fantasyTeam.name) {
@@ -28,23 +23,21 @@ app.controller('PlayerController', function($scope, playerService) {
 				team.players.push(player);
 			}
 		}
-	};
+	},
 
-	$scope.shouldShowDraftedPlayer = function(player) {
-		return ($scope.showDrafted == player.drafted || !player.drafted) && player.shouldShow; 
-	};
+	shouldShowDraftedPlayer: function(player) {
+		return (this.showDrafted == player.drafted || !player.drafted) && player.shouldShow; 
+	},
 
-	$scope.showQB = function(showQBOption) {
+	showQB: function(showQBOption) {
 		for (var j=0; j < this.players.length; j++) {
 				var player = this.players[j];
 				player.shouldShow = (player.Position == "QB" && showQBOption) || !showQBOption;
 			}
-	};
-
-	function loadPlayerData() {
-		$scope.players = playerService.getAllPlayers();
-	};
+	},
 });
+
+app.controller('playerCtrl', PlayerController);
 
 app.factory("playerService", function($http, $q) {
 	return({
@@ -90,7 +83,6 @@ app.factory("playerService", function($http, $q) {
     // I transform the successful response, unwrapping the application data
     // from the API response payload.
     function handleSuccess( response ) {
-
         return( response.data );
     }
 });

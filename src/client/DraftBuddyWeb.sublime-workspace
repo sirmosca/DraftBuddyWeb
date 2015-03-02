@@ -107,14 +107,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "features.txt",
-			"settings":
-			{
-				"buffer_size": 310,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -196,14 +188,18 @@
 		"/C/git/DraftBuddyWeb/docs",
 		"/C/git/DraftBuddyWeb/src",
 		"/C/git/DraftBuddyWeb/src/client",
+		"/C/git/DraftBuddyWeb/src/client/js",
+		"/C/git/DraftBuddyWeb/src/client/js/bootstrap",
 		"/C/git/DraftBuddyWeb/src/server"
 	],
 	"file_history":
 	[
+		"/C/Program Files/Sublime Text 3/js_mvc",
+		"/C/git/DraftBuddyWeb/src/client/features.txt",
+		"/C/Users/adamo/Desktop/TheLittleSchemer.txt",
 		"/C/git/DraftBuddyWeb/src/client/DraftBuddyWeb.sublime-project",
 		"/C/git/DraftBuddyWeb/src/client/draftbuddy_backbone/proj.sublime-project",
 		"/C/git/DraftBuddyWeb/src/client/draftbuddy_backbone/js/draftbuddy-app.js",
-		"/C/git/DraftBuddyWeb/src/client/features.txt",
 		"/C/git/DraftBuddyWeb/src/client/draftbuddy_backbone/index.html",
 		"/C/Users/adamo/Desktop/notes about backbone",
 		"/C/git/DraftBuddyWeb/src/client/draftbuddy_backbone/style.css",
@@ -395,38 +391,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "features.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 310,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								173,
-								173
-							]
-						],
-						"settings":
-						{
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
