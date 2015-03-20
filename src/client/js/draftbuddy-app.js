@@ -16,8 +16,16 @@ function PlayerController(playerService) {
 
 angular.extend(PlayerController.prototype, {
 	draft: function(fantasyTeam, player) {
+		for (var i=0; i < this.teams.length; i++) {
+			var team = this.teams[i];
+			team.players = team.players.filter(function(teamPlayer) {
+				return teamPlayer.Rank != player.Rank;
+			});
+		}
+
+
 		fantasyTeam.players.push(player);
-		console.log(fantasyTeam);
+		console.log(this.teams);;
 	},
 
 	shouldShowDraftedPlayer: function(player) {
@@ -46,12 +54,12 @@ app.factory("playerService", function($http, $q) {
 		//});
 
 		var data = [
-			{'ADP': 1.01, 'Overall': 1.2, 'Name': "DeMarco Murray", 'Position': "RB", 'Team': "DAL", 'Times Drafted': 84, 'Bye': 11, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'ADP': 1.03, 'Overall': 2.7, 'Name': "Peyton Manning", 'Position': "QB", 'Team': "DEN", 'Times Drafted': 41, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'ADP': 1.03, 'Overall': 3.4, 'Name': "Marshawn Lynch", 'Position': "RB", 'Team': "SEA", 'Times Drafted': 19, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'ADP': 1.04, 'Overall': 4.1, 'Name': "LeVeon Bell", 'Position': "RB", 'Team': "PIT", 'Times Drafted': 65, 'Bye': 12, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'ADP': 1.05, 'Overall': 4.9, 'Name': "Jamaal Charles", 'Position': "RB", 'Team': "KC", 'Times Drafted': 67, 'Bye': 6, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'ADP': 1.05, 'Overall': 5.1, 'Name': "Demaryius Thomas", 'Position': "WR", 'Team': "DEN", 'Times Drafted': 54, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
+			{'Rank': 1, 'ADP': 1.01, 'Overall': 1.2, 'Name': "DeMarco Murray", 'Position': "RB", 'Team': "DAL", 'Times Drafted': 84, 'Bye': 11, 'Watch': true, 'drafted': false, 'shouldShow': true},
+			{'Rank': 2, 'ADP': 1.03, 'Overall': 2.7, 'Name': "Peyton Manning", 'Position': "QB", 'Team': "DEN", 'Times Drafted': 41, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
+			{'Rank': 3, 'ADP': 1.03, 'Overall': 3.4, 'Name': "Marshawn Lynch", 'Position': "RB", 'Team': "SEA", 'Times Drafted': 19, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
+			{'Rank': 4, 'ADP': 1.04, 'Overall': 4.1, 'Name': "LeVeon Bell", 'Position': "RB", 'Team': "PIT", 'Times Drafted': 65, 'Bye': 12, 'Watch': true, 'drafted': false, 'shouldShow': true},
+			{'Rank': 5, 'ADP': 1.05, 'Overall': 4.9, 'Name': "Jamaal Charles", 'Position': "RB", 'Team': "KC", 'Times Drafted': 67, 'Bye': 6, 'Watch': true, 'drafted': false, 'shouldShow': true},
+			{'Rank': 6, 'ADP': 1.05, 'Overall': 5.1, 'Name': "Demaryius Thomas", 'Position': "WR", 'Team': "DEN", 'Times Drafted': 54, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
 		];
 		return data;
 		//return (request.then(handleSuccess, handleError));
