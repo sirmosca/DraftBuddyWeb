@@ -18,14 +18,13 @@
 				<input type="checkbox" ng-model="ctrl.showQBOption" ng-change="ctrl.showQB(showQBOption)">
 			</div>
 			<div ng-repeat="player in ctrl.players" ng-show="ctrl.shouldShowDraftedPlayer(player)" ng-class="{'player-drafted': player.drafted}">
-				{{player.Name}}
-				{{player.ADP}}
+				<span ng-bind="player.Name"></span>
+				<span ng-bind="player.ADP"></span>
 				<span class="nullable">
 	        		<select ng-show="ctrl.shouldShow" ng-model="fantasyTeam" ng-options="team.name for team in ctrl.teams" ng-change="ctrl.draft(fantasyTeam, player)">
 	        			<option value="">-- choose fantasy team -- </option>
 	        		</select>
 	        	</span>
-	        	{{fantasyTeam}}
 	        	<input type="checkbox" ng-model="player.Watch" >
 			</div>
         </div>
