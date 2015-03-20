@@ -23,9 +23,7 @@ angular.extend(PlayerController.prototype, {
 			});
 		}
 
-
 		fantasyTeam.players.push(player);
-		console.log(this.teams);;
 	},
 
 	shouldShowDraftedPlayer: function(player) {
