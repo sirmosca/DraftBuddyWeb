@@ -15,14 +15,9 @@ function PlayerController(playerService) {
 }
 
 angular.extend(PlayerController.prototype, {
-	draft: function() {
-		for (var i=0; i < $scope.teams.length; i++) {
-			var team = $scope.teams[i];
-			if (team.name == fantasyTeam.name) {
-				player.drafted = true
-				team.players.push(player);
-			}
-		}
+	draft: function(fantasyTeam, player) {
+		fantasyTeam.players.push(player);
+		console.log(fantasyTeam);
 	},
 
 	shouldShowDraftedPlayer: function(player) {
