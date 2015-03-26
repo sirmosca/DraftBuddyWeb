@@ -25,6 +25,12 @@ angular.extend(PlayerController.prototype, {
 			});
 		}
 
+		if (fantasyTeam === null) {
+			player.drafted = false;
+			return;
+		}
+
+		player.drafted = true;
 		fantasyTeam.players.push(player);
 	},
 

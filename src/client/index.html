@@ -34,7 +34,7 @@
 				<span class="col-md-2" ng-bind="player.Name"></span>
 				<span class="col-md-1" ng-bind="player.ADP"></span>
 				<div class="col-md-2" class="nullable">
-	        		<select ng-show="ctrl.shouldShow" ng-model="fantasyTeam" ng-options="team.name for team in ctrl.teams" ng-change="ctrl.draft(fantasyTeam, player)">
+	        		<select ng-model="fantasyTeam" ng-options="team.name for team in ctrl.teams" ng-change="ctrl.draft(fantasyTeam, player)">
 	        			<option value="">-- choose fantasy team -- </option>
 	        		</select>
 	        	</div>
