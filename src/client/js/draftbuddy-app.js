@@ -4,7 +4,9 @@ function PlayerController(playerService) {
 	this.showDrafted = true;
 	this.shouldShow = true;
 	this.showQBOption = false;
-	this.players = playerService.getAllPlayers();
+	this.positions = ['QB', 'RB', 'WR', 'DEF', 'K', 'TE'];
+	this.selectedPositions = ['QB', 'RB', 'WR', 'DEF', 'K', 'TE'];
+	this.players = playerService.getAllPlayers();;
 	this.teams = [
 		{'name':"adamo", 'players': []}, 
 		{'name':"ben", 'players': []}, 
@@ -30,11 +32,32 @@ angular.extend(PlayerController.prototype, {
 		return (this.showDrafted == player.drafted || !player.drafted) && player.shouldShow; 
 	},
 
-	showQB: function(showQBOption) {
-		for (var j=0; j < this.players.length; j++) {
-				var player = this.players[j];
-				player.shouldShow = (player.Position == "QB" && showQBOption) || !showQBOption;
+	contains: function(items, searchItem) {
+		for (var i=0; i < items.length; i++) {
+			if (items[i] === searchItem) {
+				return true;
 			}
+		}
+
+		return false;
+	},
+
+	showPosition: function(position) {
+		var positionFound = this.contains(this.selectedPositions, position);
+
+		if (positionFound) {
+			this.selectedPositions = this.selectedPositions.filter(function(selectedPosition) {
+				return selectedPosition != position;
+			});
+		}
+		else {
+			this.selectedPositions.push(position);
+		}
+
+		for(var i=0; i < this.players.length; i++) {
+			var player = this.players[i];
+			player.shouldShow = this.contains(this.selectedPositions, player.Position);
+		}
 	},
 });
 

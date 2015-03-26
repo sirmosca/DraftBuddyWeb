@@ -8,11 +8,14 @@
 	</head>
 	<body>
 		<div ng-controller="playerCtrl as ctrl">
-			<div>
-				Show Drated Players?
-				<input type="checkbox" ng-model="ctrl.showDrafted">
-				QB
-				<input type="checkbox" ng-model="ctrl.showQBOption" ng-change="ctrl.showQB(showQBOption)">
+			<div class="row">
+				Show Drated Players? <input type="checkbox" ng-model="ctrl.showDrafted">
+				<div ng-repeat="position in ctrl.positions">
+					<label class="col-md-1">
+						<span ng-bind="position"></span>
+						<input type="checkbox" checked ng-click="ctrl.showPosition(position)">
+					</label>
+				</div>
 			</div>
 			<div class="row">
 				<span class="col-md-2">Player Name</span>
