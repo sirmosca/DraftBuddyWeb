@@ -2,6 +2,7 @@ var app = angular.module('draftbuddy', []);
 
 function PlayerController(playerService) {
 	this.showDrafted = true;
+	this.showWatch = false;
 	this.shouldShow = true;
 	this.showQBOption = false;
 	this.positions = ['QB', 'RB', 'WR', 'DEF', 'K', 'TE'];
@@ -18,6 +19,7 @@ function PlayerController(playerService) {
 
 angular.extend(PlayerController.prototype, {
 	draft: function(fantasyTeam, player) {
+		console.log(this.teams);
 		for (var i=0; i < this.teams.length; i++) {
 			var team = this.teams[i];
 			team.players = team.players.filter(function(teamPlayer) {
@@ -35,7 +37,16 @@ angular.extend(PlayerController.prototype, {
 	},
 
 	shouldShowDraftedPlayer: function(player) {
-		return (this.showDrafted == player.drafted || !player.drafted) && player.shouldShow; 
+		var showDrafted = (player.drafted === this.showDrafted || !player.drafted);
+		console.log(player.Name + " 1---> " + showDrafted);
+		
+		var showWatch = (player.Watch === this.showWatch) || player.Watch;
+		console.log(player.Name + " 2---> " + showWatch);
+		
+		var viewingPosition = this.selectedPositions.indexOf(player.Position) > -1;
+		console.log(player.Name + " 3---> " + viewingPosition);
+
+		return (showDrafted && showWatch && viewingPosition);
 	},
 
 	contains: function(items, searchItem) {
@@ -81,12 +92,12 @@ app.factory("playerService", function($http, $q) {
 		//});
 
 		var data = [
-			{'Rank': 1, 'ADP': 1.01, 'Overall': 1.2, 'Name': "DeMarco Murray", 'Position': "RB", 'Team': "DAL", 'Times Drafted': 84, 'Bye': 11, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'Rank': 2, 'ADP': 1.03, 'Overall': 2.7, 'Name': "Peyton Manning", 'Position': "QB", 'Team': "DEN", 'Times Drafted': 41, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'Rank': 3, 'ADP': 1.03, 'Overall': 3.4, 'Name': "Marshawn Lynch", 'Position': "RB", 'Team': "SEA", 'Times Drafted': 19, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'Rank': 4, 'ADP': 1.04, 'Overall': 4.1, 'Name': "LeVeon Bell", 'Position': "RB", 'Team': "PIT", 'Times Drafted': 65, 'Bye': 12, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'Rank': 5, 'ADP': 1.05, 'Overall': 4.9, 'Name': "Jamaal Charles", 'Position': "RB", 'Team': "KC", 'Times Drafted': 67, 'Bye': 6, 'Watch': true, 'drafted': false, 'shouldShow': true},
-			{'Rank': 6, 'ADP': 1.05, 'Overall': 5.1, 'Name': "Demaryius Thomas", 'Position': "WR", 'Team': "DEN", 'Times Drafted': 54, 'Bye': 4, 'Watch': true, 'drafted': false, 'shouldShow': true},
+			{'Rank': 1, 'ADP': 1.01, 'Overall': 1.2, 'Name': "DeMarco Murray", 'Position': "RB", 'Team': "DAL", 'Times Drafted': 84, 'Bye': 11, 'Watch': false, 'drafted': false, 'shouldShow': true},
+			{'Rank': 2, 'ADP': 1.03, 'Overall': 2.7, 'Name': "Peyton Manning", 'Position': "QB", 'Team': "DEN", 'Times Drafted': 41, 'Bye': 4, 'Watch': false, 'drafted': false, 'shouldShow': true},
+			{'Rank': 3, 'ADP': 1.03, 'Overall': 3.4, 'Name': "Marshawn Lynch", 'Position': "RB", 'Team': "SEA", 'Times Drafted': 19, 'Bye': 4, 'Watch': false, 'drafted': false, 'shouldShow': true},
+			{'Rank': 4, 'ADP': 1.04, 'Overall': 4.1, 'Name': "LeVeon Bell", 'Position': "RB", 'Team': "PIT", 'Times Drafted': 65, 'Bye': 12, 'Watch': false, 'drafted': false, 'shouldShow': true},
+			{'Rank': 5, 'ADP': 1.05, 'Overall': 4.9, 'Name': "Jamaal Charles", 'Position': "RB", 'Team': "KC", 'Times Drafted': 67, 'Bye': 6, 'Watch': false, 'drafted': false, 'shouldShow': true},
+			{'Rank': 6, 'ADP': 1.05, 'Overall': 5.1, 'Name': "Demaryius Thomas", 'Position': "WR", 'Team': "DEN", 'Times Drafted': 54, 'Bye': 4, 'Watch': false, 'drafted': false, 'shouldShow': true},
 		];
 		return data;
 		//return (request.then(handleSuccess, handleError));

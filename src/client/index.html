@@ -9,7 +9,10 @@
 	<body>
 		<div ng-controller="playerCtrl as ctrl">
 			<div class="row">
-				Show Drated Players? <input type="checkbox" ng-model="ctrl.showDrafted">
+				<span class="col-md-3">Show Drated Players? <input type="checkbox" ng-model="ctrl.showDrafted"></span>
+				<span class="col-md-1">Show Watch?<input type="checkbox" ng-model="ctrl.showWatch"></span>
+			</div>
+			<div class="row">
 				<div ng-repeat="position in ctrl.positions">
 					<label class="col-md-1">
 						<span ng-bind="position"></span>
@@ -19,6 +22,7 @@
 			</div>
 			<div class="row">
 				<span class="col-md-2">Player Name</span>
+				<span class="col-md-1">Position</span>
 				<span class="col-md-1">ADP</span>
 				<span class="col-md-2">Fantasy Team</span>
 				<span class="col-md-1">Watch?</span>
@@ -26,12 +30,13 @@
 			<div class="row">
 				<span class="col-md-2">-----------</span>
 				<span class="col-md-1">---</span>
+				<span class="col-md-1">---</span>
 				<span class="col-md-2">------------</span>
 				<span class="col-md-1">------</span>
 			</div>
-			<div ng-repeat="player in ctrl.players" ng-show="ctrl.shouldShowDraftedPlayer(player)" 
-				ng-class="{'player-drafted': player.drafted}" class="row">
+			<div ng-repeat="player in ctrl.players" ng-show="ctrl.shouldShowDraftedPlayer(player)" ng-class="{'player-drafted': player.drafted}" class="row">
 				<span class="col-md-2" ng-bind="player.Name"></span>
+				<span class="col-md-1" ng-bind="player.Position"></span>
 				<span class="col-md-1" ng-bind="player.ADP"></span>
 				<div class="col-md-2" class="nullable">
 	        		<select ng-model="fantasyTeam" ng-options="team.name for team in ctrl.teams" ng-change="ctrl.draft(fantasyTeam, player)">
