@@ -21,3 +21,8 @@
 *.app
 *.rlib
 target
+
+
+# sublime project files
+*.sublime-project
+*.sublime-workspace
