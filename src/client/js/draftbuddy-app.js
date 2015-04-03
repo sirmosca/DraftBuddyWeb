@@ -35,10 +35,6 @@ angular.extend(PlayerController.prototype, {
 		fantasyTeam.players.push(player);
 	},
 
-	search: function(searchText) {
-		console.log(searchText);
-	},
-
 	shouldShowDraftedPlayer: function(player) {
 		var showDrafted = (player.drafted === this.showDrafted || !player.drafted);		
 		var showWatch = (player.Watch === this.showWatch) || player.Watch;
