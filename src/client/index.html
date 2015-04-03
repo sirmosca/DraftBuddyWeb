@@ -9,6 +9,15 @@
 	<body>
 		<div ng-controller="playerCtrl as ctrl">
 			<div class="row">
+				<form ng-submit="ctrl.search(ctrl.searchText)" name="myForm">
+					<input class="col-md-6" type="text" placeholder="Search..." ng-model="ctrl.searchText">
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+			<div class="row">
+				<span class="col-md-6">-------------------</span>
+			</div>
+			<div class="row">
 				<span class="col-md-3">Show Drated Players? <input type="checkbox" ng-model="ctrl.showDrafted"></span>
 				<span class="col-md-1">Show Watch?<input type="checkbox" ng-model="ctrl.showWatch"></span>
 			</div>

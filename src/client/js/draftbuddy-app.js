@@ -3,6 +3,7 @@ var app = angular.module('draftbuddy', []);
 function PlayerController(playerService) {
 	this.showDrafted = true;
 	this.showWatch = false;
+	this.searchText = "";
 	this.positions = ['QB', 'RB', 'WR', 'DEF', 'K', 'TE'];
 	this.selectedPositions = ['QB', 'RB', 'WR', 'DEF', 'K', 'TE'];
 	this.players = playerService.getAllPlayers();;
@@ -34,15 +35,14 @@ angular.extend(PlayerController.prototype, {
 		fantasyTeam.players.push(player);
 	},
 
+	search: function(searchText) {
+		console.log(searchText);
+	},
+
 	shouldShowDraftedPlayer: function(player) {
-		var showDrafted = (player.drafted === this.showDrafted || !player.drafted);
-		console.log(player.Name + " 1---> " + showDrafted);
-		
+		var showDrafted = (player.drafted === this.showDrafted || !player.drafted);		
 		var showWatch = (player.Watch === this.showWatch) || player.Watch;
-		console.log(player.Name + " 2---> " + showWatch);
-		
 		var viewingPosition = this.selectedPositions.indexOf(player.Position) > -1;
-		console.log(player.Name + " 3---> " + viewingPosition);
 
 		return (showDrafted && showWatch && viewingPosition);
 	},
