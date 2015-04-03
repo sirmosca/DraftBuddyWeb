@@ -43,8 +43,9 @@ angular.extend(PlayerController.prototype, {
 		var showDrafted = (player.drafted === this.showDrafted || !player.drafted);		
 		var showWatch = (player.Watch === this.showWatch) || player.Watch;
 		var viewingPosition = this.selectedPositions.indexOf(player.Position) > -1;
+		var searchMatch =  player.Name.toLowerCase().search(this.searchText.toLowerCase()) > -1;
 
-		return (showDrafted && showWatch && viewingPosition);
+		return (showDrafted && showWatch && viewingPosition && searchMatch);
 	},
 
 	contains: function(items, searchItem) {
