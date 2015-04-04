@@ -1,6 +1,10 @@
 var app = angular.module('draftbuddy', []);
 
 function PlayerController(playerService) {
+	$(function () {
+	  $('[data-toggle="popover"]').popover()
+	})
+
 	this.showDrafted = true;
 	this.showWatch = false;
 	this.searchText = "";
@@ -18,24 +22,26 @@ function PlayerController(playerService) {
 
 angular.extend(PlayerController.prototype, {
 	draft: function(fantasyTeam, player) {
-		console.log(this.teams);
-		for (var i=0; i < this.teams.length; i++) {
-			var team = this.teams[i];
-			team.players = team.players.filter(function(teamPlayer) {
-				return teamPlayer.Rank != player.Rank;
-			});
-		}
-
-		if (fantasyTeam === null) {
-			player.drafted = false;
-			return;
-		}
-
-		player.drafted = true;
-		fantasyTeam.players.push(player);
+		player.fantasyTeam = fantasyTeam;
+		player.drafted = fantasyTeam !== null;
 	},
 
-	shouldShowDraftedPlayer: function(player) {
+	showFantasyTeamPlayers: function(fantasyTeam) {
+		if (fantasyTeam === undefined) return;
+
+		var p = this.players.filter(function (player) {
+			return player.fantasyTeam === fantasyTeam;
+		});
+
+		var teamPlayers = "";
+		for (var i=0; i < p.length; i++) {
+			teamPlayers = teamPlayers + p[i].Name + "\n";
+		}
+
+ 		return teamPlayers;
+	},
+
+	showPlayer: function(player) {
 		var showDrafted = (player.drafted === this.showDrafted || !player.drafted);		
 		var showWatch = (player.Watch === this.showWatch) || player.Watch;
 		var viewingPosition = this.selectedPositions.indexOf(player.Position) > -1;
