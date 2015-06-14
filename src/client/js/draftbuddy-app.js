@@ -25,7 +25,7 @@ function PlayerController(playerService) {
 		playerService.getAllPlayers().then(function(players) {
 			self.players = players;
 			for (var i=0; i < self.players.length; i++) {
-				self.players[i].watch = true;
+				self.players[i].watch = false;
 			}
 		}, function(response) {
 			console.log("error getting playres");
@@ -58,11 +58,11 @@ angular.extend(PlayerController.prototype, {
 
 	showPlayer: function(player) {
 		var showDrafted = (player.drafted === this.showDrafted || !player.drafted);		
-		var showWatch = (player.watch === this.showWatch) || player.watch;
+		var gonnaWatch = this.showWatch ? (player.watch === this.showWatch) : true;
 		var viewingPosition = this.selectedPositions.indexOf(player.Position) > -1;
 		var searchMatch =  player.Name.toLowerCase().search(this.searchText.toLowerCase()) > -1;
 
-		return (showDrafted && showWatch && viewingPosition && searchMatch);
+		return (showDrafted && gonnaWatch && viewingPosition && searchMatch);
 	},
 
 	contains: function(items, searchItem) {
@@ -101,7 +101,7 @@ app.factory("playerService", function($http, $q) {
 	function getAllPlayers() {
 		var def = $q.defer();
 
-		$http.get("http://192.168.0.102/test")
+		$http.get("http://192.168.0.103/players")
 			.success(function(data) {
 				service.players = data;
 				def.resolve(data);
