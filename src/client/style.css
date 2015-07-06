@@ -2,3 +2,8 @@
 	background-color: gray;
 	color: black;
 }
+
+body {
+	width: auto;
+	margin: 5 auto;
+}

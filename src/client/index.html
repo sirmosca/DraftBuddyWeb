@@ -8,64 +8,71 @@
 	</head>
 	<body>
 		<div ng-controller="playerCtrl as ctrl">
-			<div class="row">
-				<input class="col-md-6" type="text" placeholder="Search..." ng-model="ctrl.searchText">
-			</div>
-			<div class="row">
-				<span class="col-md-6">-------------------</span>
-			</div>
-			<div class="row">
-				<span class="col-md-3">Show Drated Players? <input type="checkbox" ng-model="ctrl.showDrafted"></span>
-				<span class="col-md-1">Show Watch?<input type="checkbox" ng-model="ctrl.showWatch"></span>
-			</div>
-			<div class="row">
-				<div ng-repeat="position in ctrl.positions">
-					<label class="col-md-1">
-						<span ng-bind="position"></span>
-						<input type="checkbox" checked ng-click="ctrl.showPosition(position)">
-					</label>
+			<div class="col-md-9">
+				<div class="row">
+					<input class="col-md-6" type="text" placeholder="Search..." ng-model="ctrl.searchText">
+				</div>
+				
+				<div class="row">
+					<span class="col-md-3">Show Drated Players? <input type="checkbox" ng-model="ctrl.showDrafted"></span>
+					<span class="col-md-3">Show Watch?<input type="checkbox" ng-model="ctrl.showWatch"></span>
+				</div>
+				<div class="row">
+					<div ng-repeat="position in ctrl.positions">
+						<label class="col-md-1">
+							<span ng-bind="position"></span>
+							<input type="checkbox" checked ng-click="ctrl.showPosition(position)">
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<span class="col-md-2">Player Name</span>
+					<span class="col-md-1">Position</span>
+					<span class="col-md-1">ADP</span>
+					<span class="col-md-1">Bye</span>
+					<span class="col-md-3">Fantasy Team</span>
+					<span class="col-md-1">Watch?</span>
+				</div>
+				<div class="row">
+					<span class="col-md-2">-----------</span>
+					<span class="col-md-1">---</span>
+					<span class="col-md-1">---</span>
+					<span class="col-md-1">------</span>
+					<span class="col-md-3">------------</span>
+					<span class="col-md-1">------</span>
+				</div>
+				<div ng-repeat="player in ctrl.players" ng-show="ctrl.showPlayer(player)" ng-class="{'player-drafted': player.drafted}" class="row">
+					<span class="col-md-2" ng-bind="player.Name"></span>
+					<span class="col-md-1" ng-bind="player.Position"></span>
+					<span class="col-md-1" ng-bind="player.ADP"></span>
+					<span class="col-md-1" ng-bind="player.Bye"></span>
+					<div class="col-md-3" class="nullable">
+		        		<select ng-model="fantasyTeam" ng-options="team.name for team in ctrl.teams" ng-change="ctrl.draft(fantasyTeam, player)">
+		        			<option value="">-- choose fantasy team -- </option>
+		        		</select>
+		        	</div>
+		        	<div class="col-md-1">
+		        		<input type="checkbox" ng-model="player.watch" >
+		        	</div>
 				</div>
 			</div>
-			<div class="row">
-				<span class="col-md-2">Player Name</span>
-				<span class="col-md-1">Position</span>
-				<span class="col-md-1">ADP</span>
-				<span class="col-md-2">Fantasy Team</span>
-				<span class="col-md-1">Watch?</span>
-			</div>
-			<div class="row">
-				<span class="col-md-2">-----------</span>
-				<span class="col-md-1">---</span>
-				<span class="col-md-1">---</span>
-				<span class="col-md-2">------------</span>
-				<span class="col-md-1">------</span>
-			</div>
-			<div ng-repeat="player in ctrl.players" ng-show="ctrl.showPlayer(player)" ng-class="{'player-drafted': player.drafted}" class="row">
-				<span class="col-md-2" ng-bind="player.Name"></span>
-				<span class="col-md-1" ng-bind="player.Position"></span>
-				<span class="col-md-1" ng-bind="player.ADP"></span>
-				<div class="col-md-2" class="nullable">
-	        		<select ng-model="fantasyTeam" ng-options="team.name for team in ctrl.teams" ng-change="ctrl.draft(fantasyTeam, player)">
-	        			<option value="">-- choose fantasy team -- </option>
-	        		</select>
-	        	</div>
-	        	<div class="col-md-1">
-	        		<input type="checkbox" ng-model="player.watch" >
-	        	</div>
-	        	<div class="col-md-1">
-	        		<a id="fantasyTeamPopover" tabindex="0" class="btn btn-xs btn-default" role="button" data-toggle="popover" data-trigger="focus" 
-	        			data-original-title="{{player.fantasyTeam.name}}" 
-	        			data-content={{ctrl.showFantasyTeamPlayers(player.fantasyTeam)}}>
-	        			View Team
-	        		</a>
 
-	        	</div>
+			<div class="container col-md-3">
+				<accordion close-others="true">
+					<accordion-group heading="{{team.name}}" ng-repeat="team in ctrl.teams">
+						<div class="row-fluid" ng-repeat="teamPlayer in ctrl.getPlayersForTeam(team) track by $index">
+			   				<span class="col-md-8">{{teamPlayer.Name}}</span>
+			   				<span class="col-md-2">{{teamPlayer.Position}}</span>
+			   				<span class="col-md-2">{{teamPlayer.Bye}}</span>
+			        	</div>	
+					</accordion-group>
+				</accordion>
 			</div>
         </div>
 
         <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
 		<script type="text/javascript" src="js/draftbuddy-app.js"></script>
-		<script src="js/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
 	</body>
 </html>

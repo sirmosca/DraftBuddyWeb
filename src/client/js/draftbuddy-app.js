@@ -1,10 +1,6 @@
-var app = angular.module('draftbuddy', []);
+var app = angular.module('draftbuddy', ['ui.bootstrap']);
 
 function PlayerController(playerService) {
-	$(function() {
-	  $('[data-toggle="popover"]').popover()
-	})
-
 	var self = this;
 	self.showDrafted = true;
 	self.showWatch = false;
@@ -41,19 +37,13 @@ angular.extend(PlayerController.prototype, {
 		player.drafted = fantasyTeam !== null;
 	},
 
-	showFantasyTeamPlayers: function(fantasyTeam) {
-		if (fantasyTeam === undefined) return;
-
+	getPlayersForTeam: function(fantasyTeam) {
+		if (fantasyTeam == null) return;
 		var p = this.players.filter(function (player) {
-			return player.fantasyTeam === fantasyTeam;
+			return player.fantasyTeam && player.fantasyTeam.name === fantasyTeam.name;
 		});
 
-		var teamPlayers = "";
-		for (var i=0; i < p.length; i++) {
-			teamPlayers = teamPlayers + p[i].Name + "\n";
-		}
-
- 		return teamPlayers;
+		return p;
 	},
 
 	showPlayer: function(player) {
@@ -101,7 +91,7 @@ app.factory("playerService", function($http, $q) {
 	function getAllPlayers() {
 		var def = $q.defer();
 
-		$http.get("http://192.168.0.103/players")
+		$http.get("http://192.168.0.102/players")
 			.success(function(data) {
 				service.players = data;
 				def.resolve(data);
