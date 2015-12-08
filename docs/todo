@@ -1,0 +1,10 @@
+need to link files
+
+write tests
+	execute tests from test folder within build folder
+
+gulp
+	break up tasks (scripts and clean)
+	create workflow tasks 
+		like build which executes clean then scripts
+	copy tests to build folder

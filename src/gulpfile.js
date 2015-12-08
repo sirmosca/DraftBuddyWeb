@@ -21,7 +21,6 @@ gulp.task('scripts', ['clean'], function() {
 });
 
 gulp.task('test', function(done) {
-	console.log(__dirname);
 	new Server({
 		configFile: __dirname +  '/client/js/tests/app/karma.conf.js',
 		singleRun: true
