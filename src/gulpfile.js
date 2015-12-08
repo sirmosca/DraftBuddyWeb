@@ -13,10 +13,10 @@ gulp.task('clean', function() {
 });
 
 gulp.task('scripts', ['clean'], function() {
-	return gulp.src('client/js/draftbuddy-app.js')
+	return gulp.src(['client/js/draftbuddy-app.js', 'client/js/app-factory.js'])
 		.pipe(concat('main.js'))
 		.pipe(rename({suffix: '.min'}))
-		.pipe(uglify())
+//		.pipe(uglify())
 		.pipe(gulp.dest('build/js'));
 });
 
