@@ -6,6 +6,7 @@ var del = require('del');
 var vinylPaths = require('vinyl-paths');
 var Server = require('karma').Server;
 var runSequence = require('run-sequence');
+var replace = require('gulp-token-replace');
 
 gulp.task('clean', function() {
 	return gulp.src('build')
@@ -14,10 +15,12 @@ gulp.task('clean', function() {
 });
 
 gulp.task('scripts', function() {
-	return gulp.src(['client/js/draftbuddy-app.js', 'client/js/app-factory.js'])
+	var config = require('./client/js/app/config.dev.json');
+	return gulp.src(['client/js/app/app.js', 'client/js/app/playerService.js'])
 		.pipe(concat('app.js'))
 		.pipe(rename({suffix: '.min'}))
-		.pipe(uglify())
+		.pipe(replace({tokens:config}))
+//		.pipe(uglify())
 		.pipe(gulp.dest('build/js'));
 });
 
