@@ -80,4 +80,4 @@ angular.extend(PlayerController.prototype, {
 });
 
 app.controller('playerCtrl', PlayerController);
-app.controller('playerService', PlayerService);
+app.factory('playerService', PlayerService);

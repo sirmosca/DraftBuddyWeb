@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
       'js/angular.min.js',
       'tests/angular-mocks.js',
+      'js/ui-bootstrap-tpls-0.13.0.js',
       'js/app/playerService.js',
       'js/app/app.js',
       'tests/app.test.js'
@@ -69,5 +70,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity
-  })
-}
+  });
+};
