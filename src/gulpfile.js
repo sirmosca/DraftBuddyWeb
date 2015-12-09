@@ -49,10 +49,12 @@ gulp.task('libs', function() {
 		.pipe(gulp.dest(destinationJs));
 	gulp.src('client/js/ui-bootstrap-tpls-0.13.0.js')
 		.pipe(gulp.dest(destinationJs));
+	gulp.src('client/js/angular.min.js')
+		.pipe(gulp.dest(destinationJs));
 });
 
 gulp.task('build', function(cb) {
-	runSequence('clean', ['html', 'css', 'scripts'], cb);
+	runSequence('clean', ['html', 'css', 'scripts'], 'libs', cb);
 });
 
 gulp.task('default', function(cb) {
