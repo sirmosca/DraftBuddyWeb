@@ -8,7 +8,7 @@ var Server = require('karma').Server;
 var runSequence = require('run-sequence');
 var replace = require('gulp-token-replace');
 var destination = "build/";
-var destinationJs = destination + '/js/'
+var destinationJs = destination + 'js/'
 
 
 gulp.task('clean', function() {
@@ -29,7 +29,7 @@ gulp.task('scripts', function() {
 
 gulp.task('test', function(done) {
 	new Server({
-		configFile: __dirname +  '/client/js/tests/karma.conf.js',
+		configFile: __dirname +  '/client/tests/karma.conf.js',
 		singleRun: true
 	}, done).start();
 });
