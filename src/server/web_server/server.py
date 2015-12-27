@@ -10,4 +10,20 @@ def players():
         out = json.dumps( [ row for row in reader ] )
         return out
 
+@route('/teams')
+def teams():
+    with open('teams.data', 'rb') as csvfile:
+        fieldNames = 'name'
+        reader = csv.DictReader(csvfile, fieldNames, delimiter=',')
+        out = json.dumps( [ row for row in reader ] )
+        return out
+
+@route('/positions')
+def positions():
+    with open('positions.data', 'rb') as csvfile:
+        fieldNames = 'position'
+        reader = csv.DictReader(csvfile, fieldNames, delimiter=',')
+        out = json.dumps( [ row for row in reader ] )
+        return out
+
 run(host='localhost', port=8080, debug=True, reloader=True)
