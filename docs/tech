@@ -1,0 +1,6 @@
+server
+	python
+	bottle
+	pip-python
+	nginx
+	mongodb
