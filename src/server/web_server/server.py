@@ -13,15 +13,15 @@ def players():
 @route('/teams')
 def teams():
     with open('teams.data', 'rb') as csvfile:
-        fieldNames = 'name'
-        reader = csv.DictReader(csvfile, fieldNames, delimiter=',')
-        out = json.dumps( [ row for row in reader ] )
+        teamFieldNames = ['team']
+        teamReader = csv.DictReader(csvfile, teamFieldNames, delimiter='\n')
+        out = json.dumps( [ row for row in teamReader ] )
         return out
 
 @route('/positions')
 def positions():
     with open('positions.data', 'rb') as csvfile:
-        fieldNames = 'position'
+        fieldNames = ['position']
         reader = csv.DictReader(csvfile, fieldNames, delimiter=',')
         out = json.dumps( [ row for row in reader ] )
         return out
