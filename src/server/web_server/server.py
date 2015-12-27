@@ -1,29 +1,29 @@
 from bottle import route, run, response
-import csv
-import json
+from pymongo import MongoClient
+from bson.json_util import dumps
 
 @route('/players')
 def players():
-    with open('adp.data', 'rb') as csvfile:
-        fieldNames = 'ADP', 'Overall', 'Name', 'Position', 'Team', 'Times Drafted', 'Bye'
-        reader = csv.DictReader(csvfile, fieldNames, delimiter=',')
-        out = json.dumps( [ row for row in reader ] )
-        return out
+	client = MongoClient()
+	db = client.draftbuddy
+	cursor = db.players.find()
+	out = dumps(cursor)
+	return out
 
 @route('/teams')
 def teams():
-    with open('teams.data', 'rb') as csvfile:
-        teamFieldNames = ['team']
-        teamReader = csv.DictReader(csvfile, teamFieldNames, delimiter='\n')
-        out = json.dumps( [ row for row in teamReader ] )
-        return out
+	client = MongoClient()
+	db = client.draftbuddy
+	cursor = db.teams.find()
+	out = dumps(cursor)
+	return out
 
 @route('/positions')
 def positions():
-    with open('positions.data', 'rb') as csvfile:
-        fieldNames = ['position']
-        reader = csv.DictReader(csvfile, fieldNames, delimiter=',')
-        out = json.dumps( [ row for row in reader ] )
-        return out
+	client = MongoClient()
+	db = client.draftbuddy
+	cursor = db.positions.find()
+	out = dumps(cursor)
+	return out
 
 run(host='localhost', port=8080, debug=True, reloader=True)
