@@ -1,19 +1,19 @@
-﻿function PlayerController(playerService) {
+﻿function PlayerController(playerService, teamService) {
 	var self = this;
 	self.showDrafted = true;
 	self.showWatch = false;
 	self.searchText = "";
-	self.positions = ['QB', 'RB', 'WR', 'DEF', 'PK', 'TE'];
-	self.selectedPositions = ['QB', 'RB', 'WR', 'DEF', 'PK', 'TE'];
+	self.positions = teamService.getAllPositions();
+	self.selectedPositions = teamService.getAllPositions();
 	self.players = [];
-
-	self.teams = [
-		{'name':"adamo", 'players': []}, 
-		{'name':"ben", 'players': []}, 
-		{'name':"luke", 'players': []}, 
-		{'name':"mike", 'players': []}, 
-		{'name':"shannon", 'players': []}
-	];
+	self.teams = teamService.getAllTeams();
+//[
+//		{'name':"adamo", 'players': []}, 
+//		{'name':"ben", 'players': []}, 
+//		{'name':"luke", 'players': []}, 
+//		{'name':"mike", 'players': []}, 
+//		{'name':"shannon", 'players': []}
+//	];
 
 	self.getAllPlayers = function() {
 		playerService.getAllPlayers().then(function(players) {
