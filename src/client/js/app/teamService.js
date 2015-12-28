@@ -3,6 +3,7 @@ function TeamService ($http, $q) {
 		teams: [],
 		positions: [],
 		getAllTeams: getAllTeams,
+		getAllPositions: getAllPositions
 	};
 	return service;
 
@@ -18,7 +19,7 @@ function TeamService ($http, $q) {
 				def.reject("Failed to get all teams");
 			});
 		return def.promise;
-	},
+	}
 
 	function getAllPositions() {
 		var def = $q.defer();
