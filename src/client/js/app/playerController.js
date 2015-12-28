@@ -7,13 +7,6 @@
 	self.selectedPositions = teamService.getAllPositions();
 	self.players = [];
 	self.teams = teamService.getAllTeams();
-//[
-//		{'name':"adamo", 'players': []}, 
-//		{'name':"ben", 'players': []}, 
-//		{'name':"luke", 'players': []}, 
-//		{'name':"mike", 'players': []}, 
-//		{'name':"shannon", 'players': []}
-//	];
 
 	self.getAllPlayers = function() {
 		playerService.getAllPlayers().then(function(players) {
@@ -24,7 +17,11 @@
 		}, function(response) {
 			console.log("error getting playres");
 		});	
-	}
+	};
+
+	self.draftPlayer = function(fantasyTeam, player) {
+		playerService.draftPlayer(player);
+	};
 
 	self.getAllPlayers();
 }
