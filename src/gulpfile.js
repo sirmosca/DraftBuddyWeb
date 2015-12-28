@@ -19,7 +19,7 @@ gulp.task('clean', function() {
 
 gulp.task('scripts', function() {
 	var config = require('./client/js/app/config.dev.json');
-	return gulp.src(['client/js/app/app.js', 'client/js/app/playerController.js', 'client/js/app/playerService.js'])
+	return gulp.src(['client/js/app/app.js', 'client/js/app/playerController.js', 'client/js/app/playerService.js', 'client/js/app/teamService.js'])
 		.pipe(concat('app.js'))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(replace({tokens:config}))
