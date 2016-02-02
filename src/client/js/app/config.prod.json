@@ -1,5 +1,7 @@
 {
 	"tokens":{
-		"playersApi":"http://192.168.0.102/players"
+		"playersApi":"http://192.168.0.102/players",
+		"teamsApi":"http://192.168.0.102/teams",
+		"positionsApi":"http://192.168.0.102/positions"
 	}
 }
