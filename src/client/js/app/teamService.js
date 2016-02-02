@@ -10,7 +10,7 @@ function TeamService ($http, $q) {
 	function getAllTeams() {
 		var def = $q.defer();
 
-		$http.get("{{tokens.playersApi}}")
+		$http.get("{{tokens.teamsApi}}")
 			.success(function(data) {
 				service.teams = data;
 				def.resolve(data);
@@ -24,7 +24,7 @@ function TeamService ($http, $q) {
 	function getAllPositions() {
 		var def = $q.defer();
 
-		$http.get("{{tokens.playersApi}}")
+		$http.get("{{tokens.positionsApi}}")
 			.success(function(data) {
 				service.positions = data;
 				def.resolve(data);
