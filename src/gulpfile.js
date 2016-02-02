@@ -9,7 +9,7 @@ var runSequence = require('run-sequence');
 var replace = require('gulp-token-replace');
 var destination = "build/";
 var destinationJs = destination + 'js/'
-
+var serverScriptsPath = destination + 'server/'
 
 gulp.task('clean', function() {
 	return gulp.src('build')
@@ -25,6 +25,10 @@ gulp.task('scripts', function() {
 		.pipe(replace({tokens:config}))
 //		.pipe(uglify())
 		.pipe(gulp.dest(destinationJs));
+});
+
+gulp.task('serverScripts', function() {
+	return gulp.src('server/web_server/server.py').pipe(gulp.dest(serverScriptsPath));
 });
 
 gulp.task('test', function(done) {
@@ -51,10 +55,12 @@ gulp.task('libs', function() {
 		.pipe(gulp.dest(destinationJs));
 	gulp.src('client/js/angular.min.js')
 		.pipe(gulp.dest(destinationJs));
+	gulp.src('client/js/bootstrap/**/*')
+		.pipe(gulp.dest(destinationJs + "/bootstrap/"));
 });
 
 gulp.task('build', function(cb) {
-	runSequence('clean', ['html', 'css', 'scripts'], 'libs', cb);
+	runSequence('clean', ['html', 'css', 'scripts'], 'libs', 'serverScripts', cb);
 });
 
 gulp.task('default', function(cb) {
