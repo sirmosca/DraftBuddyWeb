@@ -3,10 +3,10 @@
 	self.showDrafted = true;
 	self.showWatch = false;
 	self.searchText = "";
-	self.positions = teamService.getAllPositions();
-	self.selectedPositions = teamService.getAllPositions();
+	self.positions = [];
+	self.selectedPositions = [];
 	self.players = [];
-	self.teams = teamService.getAllTeams();
+	self.teams = [];
 
 	self.getAllPlayers = function() {
 		playerService.getAllPlayers().then(function(players) {
@@ -19,10 +19,29 @@
 		});	
 	};
 
+    self.getAllPositions = function(ary) {
+        teamService.getAllPositions().then(function(positions) {
+            ary =  positions;
+        }, function(response) {
+                console.log("error getting positions")
+        });
+    };
+
+    self.getAllTeams = function() {
+        teamService.getAllTeams().then(function(teams) {
+            self.teams = teams;
+        }, function(response) {
+            console.log("error getting teams");
+        });
+    };
+
 	self.draftPlayer = function(fantasyTeam, player) {
 		playerService.draftPlayer(player);
 	};
 
+    self.getAllPositions(self.positions);
+    self.getAllPositions(self.selectedPositions);
+    self.getAllTeams();
 	self.getAllPlayers();
 }
 
