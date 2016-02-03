@@ -32,5 +32,6 @@ function TeamService ($http, $q) {
 			.error(function() {
 				def.reject("Failed to get all positions");
 			});
+		return def.promise;
 	}
 }
