@@ -2,6 +2,6 @@
 	"tokens":{
 		"playersApi":"http://localhost:8080/players",
 		"teamsApi":"http://localhost:8080/teams",
-		"playersApi":"http://localhost:8080/positions",
+		"positionsApi":"http://localhost:8080/positions"
 	}
 }

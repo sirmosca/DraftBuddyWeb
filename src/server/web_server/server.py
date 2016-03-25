@@ -1,6 +1,10 @@
-from bottle import route, run, response
+from bottle import route, run, response, hook
 from pymongo import MongoClient
 from bson.json_util import dumps
+
+@hook('after_request')
+def enable_cors():
+	response.headers['Access-Control-Allow-Origin'] = '*'
 
 @route('/players')
 def players():
