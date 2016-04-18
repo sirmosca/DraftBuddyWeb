@@ -1,12 +1,8 @@
 function PlayerService ($http, $q) {
-	var service = {
-		players: [],
-		getAllPlayers: getAllPlayers,
-		draftPlayer: draftPlayer
-	};
-	return service;
+	var service = {};
+	
 
-	function getAllPlayers() {
+	service.getAllPlayers = function getAllPlayers() {
 		var def = $q.defer();
 
 		$http.get("{{tokens.playersApi}}")
@@ -20,7 +16,7 @@ function PlayerService ($http, $q) {
 		return def.promise;
 	};
 
-	function draftPlayer(player) {
+	service.draftPlayer = function draftPlayer(player) {
 		var def = $q.defer();
 
 		$http.post("{{tokens.playersApi}}")
@@ -31,4 +27,6 @@ function PlayerService ($http, $q) {
 			});
 		return def.promise;
 	};
+    
+    return service;
 }
