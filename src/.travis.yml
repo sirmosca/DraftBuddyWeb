@@ -3,4 +3,4 @@ node_js:
     "5"
 before_script:
   - npm install -g gulp
-script: gulp ./src/gulpfile.js
+script: gulp runTests
