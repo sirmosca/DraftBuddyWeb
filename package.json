@@ -1,0 +1,12 @@
+{
+  "name": "DraftBuddyWeb",
+  "description": "winning since a couple years ago",
+  "author": "adamo",
+  "version": "0.0.1",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "gulp --gulpfile ./src/gulpfile.js runTests"
+  }
+}
