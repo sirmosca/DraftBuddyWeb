@@ -1,5 +1,5 @@
 {
-  "name": "DraftBuddyWeb",
+  "name": "draftbuddyweb",
   "version": "0.1.0",
   "devDependencies": {
     "del": "^2.2.0",
