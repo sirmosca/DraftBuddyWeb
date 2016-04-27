@@ -3,7 +3,5 @@ node_js:
     "5"
 before_script:
   - npm install -g gulp --save-dev
-  - cd ./src
-  - npm install package.json
-  - cd ..
+  - npm install ./src/package.json
 script: npm test
