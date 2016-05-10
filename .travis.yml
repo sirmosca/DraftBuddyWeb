@@ -21,7 +21,7 @@ deploy:
     on: &2
       repo: github.com/sirmosca/DraftBuddyWeb
   - provider: codedeploy
-    access_key_id: AKIAIE63JXSXF6EGO4PA
+    access_key_id: $AWS_ACCESS_KEY
     secret_access_key: *1
     revision_type: github
     key: latest.zip
