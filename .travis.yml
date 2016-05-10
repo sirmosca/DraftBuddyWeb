@@ -13,4 +13,5 @@ deploy:
       secure: km5qlgGFTGytWcdduvTGEWX6NDH1M+WKxDQKiI9HtKb0GjYlZlFxjiKFD4xGBPFLquPSqmHxjBusvXVb5l/OPoj5Ej5+GfVKVg4iXzz1rDF0h1+fcK0IC0rmCKn34XYePmDVGee15cdU3U68VaIgnJ5iRV1+eLZRbq1AX1DOKNQ5H71y04g03TMgocWiwxWa3fpMTk/d/P4iT/53XAAN04OrzvbFjXyRv+rPfFSD73m0GuTSHTg2KyEM/vBkhdhPC7fcN6C1Tjjp7iUxfPV/+EYBCqFlFvzJ6XtviD0I7mJ24nzuaCMmyVZ3dpxZlHNDRkMExXthadOrVAFyqFiW7I9ZwJFTTySVIDe2oL1raVRDIDkuEVxNJ+uLl5XvRqUswZfpps90e7kYhnDtfjGoRjIFWBA2Pvx7Qsoq/gNhKSTe4kwb3zGNEllZ+VuNP1I9mjs4GjjIi8ZNZ7L0zQiWwHVIQu2M1wMkuXW77/vHRGW1f8c9NECy+bt9qNjzmTW3GTUV4+Qb9YCaV4IbPRXtACxI2R/yYShn/xJAVVO8ZAbdDx0yzMt3QmlwboiP5VwD046vQkYuqwOI6r8y1CsZMgHCgsnyueA2Gf+JGIv7m8S04Ll0brfSwD/UacR/oW/ieQSn3no8QKEKk7LqJ07pYH5ps5JGdCrKMaAN/Yod9Sw=
     skip_cleanup: true
     revision_type: github
-    application: DraftBuddyWeb
+    application: DraftBuddyWeb-App
+    deployment_group: DraftBuddyWeb-Dep-Grp
