@@ -19,7 +19,7 @@ deploy:
     skip_cleanup: true
     revision_type: github
     on: &2
-      repo: travis-ci/DraftBuddyWeb
+      repo: github.com/sirmosca/DraftBuddyWeb
   - provider: codedeploy
     access_key_id: AKIAIE63JXSXF6EGO4PA
     secret_access_key: *1
