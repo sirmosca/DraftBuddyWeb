@@ -1,6 +1,6 @@
 language: node_js
 node_js: '5'
-script: echo "do it ---------------------->" && true
+script: npm test
 before_script:
 - npm install
 - export CHROME_BIN=chromium-browser
@@ -9,22 +9,16 @@ before_script:
 - zip -r latest *
 - mkdir -p dpl_cd_upload
 - mv latest.zip dpl_cd_upload/latest.zip
-script: npm test
 deploy:
-  - provider: s3
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: &1
-      secure: $AWS_SECRET_KEY
-    local_dir: dpl_cd_upload
-    skip_cleanup: true
-    revision_type: github
-    on: &2
-      repo: github.com/sirmosca/DraftBuddyWeb
-  - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: *1
-    revision_type: github
-    key: latest.zip
-    bundle_type: zip
-    application: DraftBuddyWeb-App
-    deployment_group: DraftBuddyWeb-DepGrp
+  provider: codedeploy
+  access_key_id: AKIAJ2GK3I2HQMCYDZ2Q
+  secret_access_key:
+    secure: TvlAy3AhAWofWOfh8KqI35kiZxyvSBPL2Q6z8oHIyrxMXr9XIOgAqCP1AmmLpDYRYn3iS9jELH8JwogOxs7uQXARVo8OaFP80Ad2+R7jmytWr/27fnu1aNz2Q1IGCDcLKuGKMxSLxd92vGjbZGZy2c3OSIAdVyaDSVAgeZ5IXCGT8JaD/D4bIfTXAjqWGNLSYXNy2HOPwU/SLat+2Xhg76r6ypZPQMg+PhJZYfJgMIBAbPNsA+GTJK5LmHWNY/Hc+yLvHHcjQMf2FQzlVd+r/oALkK/69M8AdXKgnAKEEmq5adNQWutFWpExdHAjFFt7bjMcjQGE3nU7GRRoVaAzaGFYRzh4iz12Y2suf2BVzdU8zT6vYmAux9ncedCqWTlMDtR/ZcZy9uf7uK2R09aP2/iHeudUxD23SW6WXrLPeTTSDyoNxONcjUpBKvXTxK9ZvWHbaYxCPqvZKJ0UVGzEwNJ3W0JIeIwbH0ylyj1vbaB7x5fDmWDY0SxnicA/shmx2ZU+iXCocv/DTbc6sNxLNXee3TaEt1B2XUZHjzSQHRBweODhbVloeVzckE2ocIrQOWfHefKD25qy6IB4iJubul92tZ8lCqsHFxu1d6vbZR0Q/TFdHewvnsGfspYKft3JVyrqDc3fK95nSy4S1lkJnfeE/eeZ9ODjb7KWj0ynogc=
+  bucket: ''
+  key: ''
+  bundle_type: ''
+  revision_type: github
+  application: DraftBuddyWeb-App
+  deployment_group: DraftBuddyWeb-DepGrp
+  on:
+    repo: sirmosca/DraftBuddyWeb
