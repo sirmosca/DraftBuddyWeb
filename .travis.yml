@@ -14,9 +14,6 @@ deploy:
   access_key_id: AKIAJ2GK3I2HQMCYDZ2Q
   secret_access_key:
     secure: TvlAy3AhAWofWOfh8KqI35kiZxyvSBPL2Q6z8oHIyrxMXr9XIOgAqCP1AmmLpDYRYn3iS9jELH8JwogOxs7uQXARVo8OaFP80Ad2+R7jmytWr/27fnu1aNz2Q1IGCDcLKuGKMxSLxd92vGjbZGZy2c3OSIAdVyaDSVAgeZ5IXCGT8JaD/D4bIfTXAjqWGNLSYXNy2HOPwU/SLat+2Xhg76r6ypZPQMg+PhJZYfJgMIBAbPNsA+GTJK5LmHWNY/Hc+yLvHHcjQMf2FQzlVd+r/oALkK/69M8AdXKgnAKEEmq5adNQWutFWpExdHAjFFt7bjMcjQGE3nU7GRRoVaAzaGFYRzh4iz12Y2suf2BVzdU8zT6vYmAux9ncedCqWTlMDtR/ZcZy9uf7uK2R09aP2/iHeudUxD23SW6WXrLPeTTSDyoNxONcjUpBKvXTxK9ZvWHbaYxCPqvZKJ0UVGzEwNJ3W0JIeIwbH0ylyj1vbaB7x5fDmWDY0SxnicA/shmx2ZU+iXCocv/DTbc6sNxLNXee3TaEt1B2XUZHjzSQHRBweODhbVloeVzckE2ocIrQOWfHefKD25qy6IB4iJubul92tZ8lCqsHFxu1d6vbZR0Q/TFdHewvnsGfspYKft3JVyrqDc3fK95nSy4S1lkJnfeE/eeZ9ODjb7KWj0ynogc=
-  bucket: ''
-  key: ''
-  bundle_type: ''
   revision_type: github
   application: DraftBuddyWeb-App
   deployment_group: DraftBuddyWeb-DepGrp
