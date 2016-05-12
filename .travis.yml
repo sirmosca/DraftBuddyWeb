@@ -24,6 +24,7 @@ deploy:
   secret_access_key: *1
   bucket: draftbuddyweb
   key: dbw
+  bundle_type: zip
   application: DraftBuddyWeb
   deployment_group: DraftBuddyWeb-DepGrp
   on: *2
