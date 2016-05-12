@@ -24,10 +24,9 @@ deploy:
   secret_access_key: *1
   bucket: draftbuddyweb
   key: dbw
-  bundle_type: zip
   application: DraftBuddyWeb
   deployment_group: DraftBuddyWeb-DepGrp
   on: *2
 before_deploy:
 - mkdir -p dpl_cd_upload
-- mv appspec.yml dpl_cd_upload/dbw
+#- mv appspec.yml dpl_cd_upload/dbw
