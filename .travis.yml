@@ -18,11 +18,11 @@ deploy:
   skip_cleanup: true
   on: &2
     repo: sirmosca/DraftBuddyWeb
-  bucket: draftbuddyweb
+  bucket: draftbuddyweb1
 - provider: codedeploy
   access_key_id: AKIAJ2GK3I2HQMCYDZ2Q
   secret_access_key: *1
-  bucket: draftbuddyweb
+  bucket: draftbuddyweb1
   key: dbw
   bundle_type: zip
   application: DraftBuddyWeb
