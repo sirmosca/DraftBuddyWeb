@@ -10,12 +10,24 @@ before_script:
 - mkdir -p dpl_cd_upload
 - mv latest.zip dpl_cd_upload/latest.zip
 deploy:
-  provider: codedeploy
+- provider: s3
   access_key_id: AKIAJ2GK3I2HQMCYDZ2Q
-  secret_access_key:
-    secure: TvlAy3AhAWofWOfh8KqI35kiZxyvSBPL2Q6z8oHIyrxMXr9XIOgAqCP1AmmLpDYRYn3iS9jELH8JwogOxs7uQXARVo8OaFP80Ad2+R7jmytWr/27fnu1aNz2Q1IGCDcLKuGKMxSLxd92vGjbZGZy2c3OSIAdVyaDSVAgeZ5IXCGT8JaD/D4bIfTXAjqWGNLSYXNy2HOPwU/SLat+2Xhg76r6ypZPQMg+PhJZYfJgMIBAbPNsA+GTJK5LmHWNY/Hc+yLvHHcjQMf2FQzlVd+r/oALkK/69M8AdXKgnAKEEmq5adNQWutFWpExdHAjFFt7bjMcjQGE3nU7GRRoVaAzaGFYRzh4iz12Y2suf2BVzdU8zT6vYmAux9ncedCqWTlMDtR/ZcZy9uf7uK2R09aP2/iHeudUxD23SW6WXrLPeTTSDyoNxONcjUpBKvXTxK9ZvWHbaYxCPqvZKJ0UVGzEwNJ3W0JIeIwbH0ylyj1vbaB7x5fDmWDY0SxnicA/shmx2ZU+iXCocv/DTbc6sNxLNXee3TaEt1B2XUZHjzSQHRBweODhbVloeVzckE2ocIrQOWfHefKD25qy6IB4iJubul92tZ8lCqsHFxu1d6vbZR0Q/TFdHewvnsGfspYKft3JVyrqDc3fK95nSy4S1lkJnfeE/eeZ9ODjb7KWj0ynogc=
-  revision_type: github
-  application: DraftBuddyWeb-App
-  deployment_group: DraftBuddyWeb-DepGrp
-  on:
+  secret_access_key: &1
+    secure: Jp9QEgrIM4mRvLqZ7cUT9hHoMusQ7bCDeI8LS4ylYMQr1zVHlPtxzUzQIformox70EzzD7LxJPvVRNMFBKZyZgoLpDLutEV9kBIquZsams6teQ1L1d2HlkdFcOSALhwK1wJ2roJiq43xjp544OQbWUc1nERA9gXYjny1CQK9obdgwsonfYSPmAU/Y2K9aBF+L2tAx7f5rAVvuKF00ZRtz5WMUppVD2xy9MJkCWmLSwQK+nYXXLRdNOGoNxqlBeRdioXpkWR9wCGFOzHNMZKGW5FRy8JZ3nP98HkCqTV1m9zDlhqUl0q/EV7CibAoDm9yXJJzGuvtw5m3WslAQYQCnaA1q3yRNIBK6PizqyjJ9WI2TixpLzTfGoGuaUkGViDZvDhSIAShT6mdQ2hnSYKUEYdLg1DixNOZ5X2Syi9caFWf+Q5uMS4Aki7jwRB0Ez+wes5IW4h3Cytm722daa3S11dHlxEfnv9NXZ5JO+6iQLWa6s/GecKNm97/UgIE8wKyYNLACi76SrheH+/o0i+X0xfpGoU3UZvpQew0d7+UquWT4XITQx6tIXljuUR6vGAnE2f4cclKMt+qUh8aNTzmnInfTB8N0bt4T0Gy6fs36JXQ8yx7sHP/WoMzzyDudtNVkuLCLFGIoB0kyUwAxSUYoA4WetCaKWHkiTwPF5FpyIQ=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &2
     repo: sirmosca/DraftBuddyWeb
+  bucket: draftbuddyweb
+- provider: codedeploy
+  access_key_id: AKIAJ2GK3I2HQMCYDZ2Q
+  secret_access_key: *1
+  bucket: draftbuddyweb
+  key: dbw
+  bundle_type: none
+  application: DraftBuddyWeb
+  deployment_group: DraftBuddyWeb-DepGrp
+  on: *2
+before_deploy:
+- mkdir -p dpl_cd_upload
+- mv appspec.yml dpl_cd_upload/dbw
