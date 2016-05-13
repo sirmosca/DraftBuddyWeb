@@ -12,7 +12,7 @@ before_script:
 #- mv latest.zip dpl_cd_upload/latest.zip
 before_deploy:
 - mkdir -p dpl_cd_upload
-- mv latest.zip dpl_cd_upload/latest.zip
+#- mv latest.zip dpl_cd_upload/latest.zip
 - pwd
 deploy:
 - provider: s3
