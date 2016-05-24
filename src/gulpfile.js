@@ -27,6 +27,16 @@ gulp.task('scripts', function() {
 		.pipe(gulp.dest(destinationJs));
 });
 
+gulp.task('scripts_prod', function() {
+	var config = require('./client/js/app/config.prod.json');
+	return gulp.src(['client/js/app/app.js', 'client/js/app/playerController.js', 'client/js/app/playerService.js', 'client/js/app/teamService.js'])
+		.pipe(concat('app.js'))
+		.pipe(rename({suffix: '.min'}))
+		.pipe(replace({tokens:config}))
+//		.pipe(uglify())
+		.pipe(gulp.dest(destinationJs));
+});
+
 gulp.task('serverScripts', function() {
 	return gulp.src('server/web_server/server.py').pipe(gulp.dest(serverScriptsPath));
 });
@@ -60,6 +70,10 @@ gulp.task('libs', function() {
 });
 
 gulp.task('build', function(cb) {
+	runSequence('clean', ['html', 'css', 'scripts'], 'libs', 'serverScripts', cb);
+});
+
+gulp.task('build_prod', function(cb) {
 	runSequence('clean', ['html', 'css', 'scripts'], 'libs', 'serverScripts', cb);
 });
 
