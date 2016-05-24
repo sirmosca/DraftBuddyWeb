@@ -1,7 +1,7 @@
 {
 	"tokens":{
-		"playersApi":"http://192.168.0.102/players",
-		"teamsApi":"http://192.168.0.102/teams",
-		"positionsApi":"http://192.168.0.102/positions"
+		"playersApi":"http://ec2-52-26-217-142.us-west-2.compute.amazonaws.com/players",
+		"teamsApi":"http://ec2-52-26-217-142.us-west-2.compute.amazonaws.com/teams",
+		"positionsApi":"http://ec2-52-26-217-142.us-west-2.compute.amazonaws.com/positions"
 	}
 }
