@@ -74,7 +74,7 @@ gulp.task('build', function(cb) {
 });
 
 gulp.task('build_prod', function(cb) {
-	runSequence('clean', ['html', 'css', 'scripts'], 'libs', 'serverScripts', cb);
+	runSequence('clean', ['html', 'css', 'scripts_prod'], 'libs', 'serverScripts', cb);
 });
 
 gulp.task('default', function(cb) {
